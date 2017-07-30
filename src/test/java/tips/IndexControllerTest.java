@@ -26,9 +26,7 @@ public class IndexControllerTest {
   @Test
   public void itShouldPrintOutHelloWorld() throws IOException {
 
-    when(response.getWriter()).thenReturn(writer);
-    IndexController index = new IndexController();
-    index.doGet(request, response);
+    when(response.getWriter()).thenReturn(writer); IndexController index = new IndexController(); index.doGet(request, response);
     verify(writer).println("Hello, world - Flex Servlet");
   }
 }
