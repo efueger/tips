@@ -4,18 +4,16 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.api.client.auth.oauth2.Credential;
 import com.google.api.client.auth.oauth2.TokenResponse;
 import com.google.api.client.googleapis.auth.oauth2.GoogleAuthorizationCodeFlow;
+import com.google.api.client.googleapis.auth.oauth2.GoogleAuthorizationCodeTokenRequest;
 import com.google.api.client.http.GenericUrl;
 import com.google.api.client.http.HttpRequest;
 import com.google.api.client.http.HttpRequestFactory;
 import com.google.api.client.http.HttpTransport;
-import com.google.api.client.http.javanet.NetHttpTransport;
-import com.google.api.client.json.JsonFactory;
-import com.google.api.client.json.jackson.JacksonFactory;
+import com.google.inject.Singleton;
 
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.Collection;
 import java.util.HashMap;
+import javax.inject.Inject;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -24,15 +22,24 @@ import javax.servlet.http.HttpServletResponse;
 
 // [START example]
 @WebServlet(name = "oauth", value = "/oauth")
+@Singleton
 public class OAuth extends HttpServlet {
-
-  private static final Collection<String> SCOPES = Arrays.asList("email", "profile");
   private static final String USERINFO_ENDPOINT
       = "https://www.googleapis.com/plus/v1/people/me/openIdConnect";
-  private static final JsonFactory JSON_FACTORY = new JacksonFactory();
-  private static final HttpTransport HTTP_TRANSPORT = new NetHttpTransport();
 
   private GoogleAuthorizationCodeFlow flow;
+  private HttpTransport transport;
+
+  public OAuth() {
+    super();
+  }
+
+  @Inject
+  OAuth(GoogleAuthorizationCodeFlow flow, HttpTransport transport) {
+    super();
+    this.flow = flow;
+    this.transport = transport;
+  }
 
   @Override
   public void doGet(HttpServletRequest req, HttpServletResponse resp)
@@ -41,20 +48,13 @@ public class OAuth extends HttpServlet {
     // Ensure that this is no request forgery going on, and that the user
     // sending us this connect request is the user that was supposed to.
     if (req.getSession().getAttribute("state") == null
-        || !req.getParameter("state").equals((String) req.getSession().getAttribute("state"))) {
+        || !req.getParameter("state").equals(req.getSession().getAttribute("state"))) {
       resp.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-      resp.sendRedirect("/books");
+      resp.sendRedirect("/");
       return;
     }
 
     req.getSession().removeAttribute("state");     // Remove one-time use state.
-
-    flow = new GoogleAuthorizationCodeFlow.Builder(
-        HTTP_TRANSPORT,
-        JSON_FACTORY,
-        getServletContext().getInitParameter("tips.clientID"),
-        getServletContext().getInitParameter("tips.clientSecret"),
-        SCOPES).build();
 
     final TokenResponse tokenResponse =
         flow.newTokenRequest(req.getParameter("code"))
@@ -63,7 +63,7 @@ public class OAuth extends HttpServlet {
 
     req.getSession().setAttribute("token", tokenResponse.toString()); // Keep track of the token.
     final Credential credential = flow.createAndStoreCredential(tokenResponse, null);
-    final HttpRequestFactory requestFactory = HTTP_TRANSPORT.createRequestFactory(credential);
+    final HttpRequestFactory requestFactory = transport.createRequestFactory(credential);
 
     final GenericUrl url = new GenericUrl(USERINFO_ENDPOINT);      // Make an authenticated request.
     final HttpRequest request = requestFactory.buildGetRequest(url);

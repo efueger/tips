@@ -25,9 +25,9 @@ public class LoginTest {
   @Mock
   HttpServletResponse response;
   @Mock
-  ServletConfig config;
-  @Mock
   HttpSession session;
+  @Mock
+  ServletConfig config;
   @Mock
   ServletContext context;
 
