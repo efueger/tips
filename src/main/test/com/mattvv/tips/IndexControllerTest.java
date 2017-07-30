@@ -1,16 +1,17 @@
 package com.mattvv.tips;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
-
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
+
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
 import org.mockito.junit.MockitoJUnitRunner;
 
 @RunWith(MockitoJUnitRunner.class)
