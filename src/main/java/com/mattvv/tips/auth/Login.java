@@ -6,7 +6,6 @@ import com.google.api.client.http.javanet.NetHttpTransport;
 import com.google.api.client.json.JsonFactory;
 import com.google.api.client.json.jackson.JacksonFactory;
 import com.google.inject.Singleton;
-
 import java.io.IOException;
 import java.math.BigInteger;
 import java.security.SecureRandom;
