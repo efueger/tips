@@ -38,25 +38,28 @@
           <!-- Navigation -->
           <div class="tips-navigation-container">
               <nav class="tips-navigation mdl-navigation">
-                <c:choose>
-                <c:when test="${not empty token}">
-                    <!-- using pageContext requires jsp-api artifact in pom.xml -->
-                    <a class="mdl-navigation__link mdl-typography--text-uppercase" href="/logout">
-                        <c:if test="${not empty userImageUrl}">
-                            <img class="img-circle" src="${fn:escapeXml(userImageUrl)}" width="24">
-                        </c:if>
-                        ${fn:escapeXml(userEmail)}
-                    </a>
-                </c:when>
-	            <c:when test="${empty token}">
+	            <c:if test="${empty token}">
                     <a class="mdl-navigation__link mdl-typography--text-uppercase" href="/login">Login</a>
-                </c:when>
-                </c:choose>
+                </c:if>
               </nav>
           </div>
-          <span class="tips-mobile-title mdl-layout-title">
-            Tips
-          </span>
+          <c:if test="${not empty token}">=
+                    <c:choose>
+                        <c:when test="${not empty userImageUrl}">
+                        <button class="tips-more-button mdl-button mdl-js-button mdl-button--icon mdl-js-ripple-effect" id="more-button" style="background-image: url(${fn:escapeXml(userImageUrl)}); background-size: cover;">
+                        </button>
+                        </c:when>
+                        <c:otherwise>
+                        <button class="tips-more-button mdl-button mdl-js-button mdl-button--icon mdl-js-ripple-effect" id="more-button">
+                            <i class="material-icons">more_vert</i>
+                         </button>
+                        </c:otherwise>
+                       </c:choose>
+                    <ul class="mdl-menu mdl-js-menu mdl-menu--bottom-right mdl-js-ripple-effect" for="more-button">
+                        <li class="mdl-menu__item">${fn:escapeXml(userEmail)}</li>
+                        <li class="mdl-menu__item"><a href="/logout">Logout</a></li>
+                    </ul>
+          </c:if>
       </div>
   </div>
   <div class="tips-content mdl-layout__content">
