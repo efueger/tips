@@ -5,6 +5,7 @@ before_script:
   - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
   - chmod +x ./cc-test-reporter
   - ./cc-test-reporter before-build
-script:
-  - mvn clean verify cobertura:cobertura coveralls:report
+after_success:
+  - mvn -B cobertura:cobertura coveralls:report
+  - cp target/cobertura/cobertura.ser cobertura.ser #copy cobertura file so codeclimate can find it
   - ./cc-test-reporter after-build -t cobertura --exit-code $TRAVIS_TEST_RESULT
