@@ -1,4 +1,18 @@
+env:
+  global:
+    - CC_TEST_REPORTER_ID=b15038ee548796d0ed31be32ac2fa605fd5b71bcbed75e31295f3aa5a69b5059
+    - GIT_COMMITTED_AT=$(if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then git log -1 --pretty=format:%ct; else git log -1 --skip 1 --pretty=format:%ct; fi)
 language: java
 jdk:
   - openjdk8
-script: mvn clean verify
+before_script:
+  - cd src/main/java
+  - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+  - chmod +x ./cc-test-reporter
+  - if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then ./cc-test-reporter before-build; fi
+  - cd ../../..
+after_success:
+  - mvn -B cobertura:cobertura coveralls:report
+  - cp target/site/cobertura/coverage.xml src/main/java/cobertura.xml #copy cobertura file so codeclimate can find it
+  - cd src/main/java
+  - if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then ./cc-test-reporter after-build -t cobertura --exit-code $TRAVIS_TEST_RESULT; fi
