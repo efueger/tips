@@ -1,7 +1,6 @@
 package com.mattvv.tips.auth;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-
 import com.google.api.client.auth.oauth2.Credential;
 import com.google.api.client.auth.oauth2.TokenResponse;
 import com.google.api.client.googleapis.auth.oauth2.GoogleAuthorizationCodeFlow;
@@ -17,7 +16,6 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -26,7 +24,6 @@ import javax.servlet.http.HttpServletResponse;
 
 // [START example]
 @WebServlet(name = "oauth", value = "/oauth")
-@SuppressWarnings("serial")
 public class OAuth extends HttpServlet {
 
   private static final Collection<String> SCOPES = Arrays.asList("email", "profile");
@@ -38,8 +35,8 @@ public class OAuth extends HttpServlet {
   private GoogleAuthorizationCodeFlow flow;
 
   @Override
-  public void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException,
-      ServletException {
+  public void doGet(HttpServletRequest req, HttpServletResponse resp)
+      throws IOException, ServletException {
 
     // Ensure that this is no request forgery going on, and that the user
     // sending us this connect request is the user that was supposed to.
