@@ -35,7 +35,7 @@ public class Login extends HttpServlet {
           .getSession()
           .setAttribute("loginDestination", (String) req.getAttribute("loginDestination"));
     } else {
-      req.getSession().setAttribute("loginDestination", "/books");
+      req.getSession().setAttribute("loginDestination", "/");
     }
 
     flow = new GoogleAuthorizationCodeFlow.Builder(
