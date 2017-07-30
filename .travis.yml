@@ -7,4 +7,4 @@ before_script:
   - ./cc-test-reporter before-build
 script:
   - mvn clean verify cobertura:cobertura coveralls:report
-  - ./cc-test-reporter after-build -t jacoco --exit-code $TRAVIS_TEST_RESULT
+  - ./cc-test-reporter after-build -t cobertura --exit-code $TRAVIS_TEST_RESULT
