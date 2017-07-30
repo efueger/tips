@@ -1,14 +1,12 @@
 package com.mattvv.tips.auth;
 
-import com.google.api.client.auth.oauth2.Credential;
-import com.google.api.client.auth.oauth2.TokenResponse;
 import com.google.api.client.googleapis.auth.oauth2.GoogleAuthorizationCodeFlow;
 import com.google.api.client.googleapis.auth.oauth2.GoogleAuthorizationCodeTokenRequest;
 import com.google.api.client.googleapis.auth.oauth2.GoogleTokenResponse;
-import com.google.api.client.http.*;
-import com.google.api.client.http.javanet.NetHttpTransport;
+import com.google.api.client.http.HttpTransport;
+import com.google.api.client.http.LowLevelHttpRequest;
+import com.google.api.client.http.LowLevelHttpResponse;
 import com.google.api.client.json.Json;
-import com.google.api.client.testing.http.HttpTesting;
 import com.google.api.client.testing.http.MockHttpTransport;
 import com.google.api.client.testing.http.MockLowLevelHttpRequest;
 import com.google.api.client.testing.http.MockLowLevelHttpResponse;
@@ -26,7 +24,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -67,7 +64,8 @@ public class OAuthTest {
   }
 
   @Test
-  public void shouldRedirectToHomeIfSessionDoesNotEqualState() throws  IOException, ServletException {
+  public void shouldRedirectToHomeIfSessionDoesNotEqualState() throws
+      IOException, ServletException {
     when(session.getAttribute("state")).thenReturn("session1");
     when(request.getParameter("state")).thenReturn("session2");
 
@@ -85,7 +83,8 @@ public class OAuthTest {
     when(request.getParameter("code")).thenReturn("code");
     when(context.getInitParameter("tips.callback")).thenReturn("http://localhost:8080/oauth");
 
-    GoogleAuthorizationCodeTokenRequest tokenRequest = mock(GoogleAuthorizationCodeTokenRequest.class);
+    GoogleAuthorizationCodeTokenRequest tokenRequest =
+        mock(GoogleAuthorizationCodeTokenRequest.class);
     GoogleTokenResponse tokenResponse = mock(GoogleTokenResponse.class);
 
     when(flow.newTokenRequest("code")).thenReturn(tokenRequest);

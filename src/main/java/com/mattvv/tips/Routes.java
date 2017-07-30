@@ -32,15 +32,15 @@ class Routes extends ServletModule {
 
   @Provides
   GoogleAuthorizationCodeFlow providesFlow() {
-    final Collection<String> SCOPES = Arrays.asList("email", "profile");
-    final JsonFactory JSON_FACTORY = new JacksonFactory();
+    final Collection<String> scopes = Arrays.asList("email", "profile");
+    final JsonFactory jacksonFactory = new JacksonFactory();
 
     return new GoogleAuthorizationCodeFlow.Builder(
         providesTransport(),
-        JSON_FACTORY,
+        jacksonFactory,
         servletContext().getInitParameter("tips.clientID"),
         servletContext().getInitParameter("tips.clientSecret"),
-        SCOPES).build();
+        scopes).build();
   }
 
   @VisibleForTesting
