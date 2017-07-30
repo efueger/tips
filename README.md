@@ -11,7 +11,7 @@ This example is a simple footy tipping application.
 ## Running Locally
 
 ```
-mvn clean appengine:devserver
+mvn clean appengine:devserver -P local
 ```
 
 ## Deploying
