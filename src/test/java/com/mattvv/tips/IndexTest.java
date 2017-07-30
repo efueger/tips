@@ -1,7 +1,8 @@
 package com.mattvv.tips;
 
 import java.io.IOException;
-import java.io.PrintWriter;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -15,20 +16,21 @@ import static org.mockito.Mockito.when;
 import org.mockito.junit.MockitoJUnitRunner;
 
 @RunWith(MockitoJUnitRunner.class)
-public class IndexControllerTest {
+public class IndexTest {
   @Mock
   HttpServletRequest request;
   @Mock
   HttpServletResponse response;
   @Mock
-  PrintWriter writer;
+  RequestDispatcher dispatcher;
 
   @Test
-  public void itShouldPrintOutHelloWorld() throws IOException {
-
-    when(response.getWriter()).thenReturn(writer);
-    IndexController index = new IndexController();
+  public void shouldUseIndexPartial() throws IOException, ServletException {
+    when(request.getRequestDispatcher("/base.jsp")).thenReturn(dispatcher);
+    Index index = new Index();
     index.doGet(request, response);
-    verify(writer).println("Hello, world - Flex Servlet");
+    verify(request).setAttribute("page", "index");
+    verify(request).getRequestDispatcher("/base.jsp");
+    verify(dispatcher).forward(request, response);
   }
 }
