@@ -4,9 +4,9 @@ import com.google.api.client.googleapis.auth.oauth2.GoogleAuthorizationCodeFlow;
 import com.google.api.client.http.javanet.NetHttpTransport;
 import com.google.inject.Injector;
 
-import javax.servlet.ServletContext;
-
 import static com.google.common.truth.Truth.assertThat;
+
+import javax.servlet.ServletContext;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
