@@ -2,6 +2,7 @@ package com.mattvv.tips;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -22,14 +23,15 @@ public class IndexTest {
   @Mock
   HttpServletResponse response;
   @Mock
-  PrintWriter writer;
+  RequestDispatcher dispatcher;
 
   @Test
-  public void itShouldPrintOutHelloWorld() throws IOException, ServletException {
-
-//    when(response.getWriter()).thenReturn(writer);
-//    Index index = new Index();
-//    index.doGet(request, response);
-//    verify(writer).println("Hello, world - Flex Servlet");
+  public void shouldUseIndexPartial() throws IOException, ServletException {
+    when(request.getRequestDispatcher("/base.jsp")).thenReturn(dispatcher);
+    Index index = new Index();
+    index.doGet(request, response);
+    verify(request).setAttribute("page", "index");
+    verify(request).getRequestDispatcher("/base.jsp");
+    verify(dispatcher).forward(request, response);
   }
 }
