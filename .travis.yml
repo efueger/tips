@@ -10,5 +10,5 @@ before_script:
   - chmod +x ./cc-test-reporter
   - ./cc-test-reporter before-build
 script:
-  - mvn clean verify
-  - ./cc-test-reporter after-build -t cobertura --exit-code $TRAVIS_TEST_RESULT
+  - mvn clean verify cobertura:cobertura
+  - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
