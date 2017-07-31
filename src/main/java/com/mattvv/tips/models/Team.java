@@ -2,11 +2,15 @@ package com.mattvv.tips.models;
 
 import com.google.common.collect.ImmutableList;
 import org.immutables.value.Value;
+import javax.annotation.Nullable;
 
 @Value.Immutable
 public abstract class Team {
   public abstract String city();
   public abstract String mascot();
+
+  @Nullable
+  public abstract Long id();
 
   public static ImmutableList<ImmutableTeam> getTeams() {
     ImmutableList.Builder<ImmutableTeam> teamBuilder = new ImmutableList.Builder<>();
