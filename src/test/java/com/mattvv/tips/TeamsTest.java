@@ -3,8 +3,8 @@ package com.mattvv.tips;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import java.io.IOException;
 import com.mattvv.tips.models.Team;
+import java.io.IOException;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
