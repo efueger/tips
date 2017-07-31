@@ -183,7 +183,7 @@
           <aggregate>true</aggregate>
           <instrumentation>
             <excludes>
-              <exclude>com/mattvv/models/Immutable*.class</exclude>
+              <exclude>com/mattvv/tips/models/Immutable*.class</exclude>
             </excludes>
           </instrumentation>
         </configuration>
