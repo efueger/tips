@@ -14,6 +14,7 @@ import javax.servlet.ServletContext;
 import com.mattvv.tips.auth.Login;
 import com.mattvv.tips.auth.Logout;
 import com.mattvv.tips.auth.OAuth;
+import org.javalite.activejdbc.Base;
 
 class Routes extends ServletModule {
   @Override
@@ -22,6 +23,7 @@ class Routes extends ServletModule {
     serve("/login").with(Login.class);
     serve("/logout").with(Logout.class);
     serve("/oauth").with(OAuth.class);
+    serve("/teams").with(Teams.class);
   }
 
   @Provides
