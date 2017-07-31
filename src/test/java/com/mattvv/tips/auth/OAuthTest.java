@@ -1,5 +1,9 @@
 package com.mattvv.tips.auth;
 
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
 import com.google.api.client.googleapis.auth.oauth2.GoogleAuthorizationCodeFlow;
 import com.google.api.client.googleapis.auth.oauth2.GoogleAuthorizationCodeTokenRequest;
 import com.google.api.client.googleapis.auth.oauth2.GoogleTokenResponse;
@@ -10,7 +14,11 @@ import com.google.api.client.json.Json;
 import com.google.api.client.testing.http.MockHttpTransport;
 import com.google.api.client.testing.http.MockLowLevelHttpRequest;
 import com.google.api.client.testing.http.MockLowLevelHttpResponse;
-
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.junit.MockitoJUnitRunner;
 import java.io.IOException;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
@@ -19,19 +27,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.Mock;
-
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-
-import org.mockito.junit.MockitoJUnitRunner;
-
 @RunWith(MockitoJUnitRunner.class)
 public class OAuthTest {
+
   @Mock
   HttpServletRequest request;
   @Mock
@@ -99,7 +97,9 @@ public class OAuthTest {
           public LowLevelHttpResponse execute() throws IOException {
             MockLowLevelHttpResponse response = new MockLowLevelHttpResponse();
             response.setContentType(Json.MEDIA_TYPE);
-            response.setContent("{\"email\":\"test@test.com\", \"userId\":\"abc\", \"userImageUrl\":\"http://path.to/image\"}");
+            response.setContent("{\"email\":\"test@test.com\","
+                    + " \"userId\":\"abc\","
+                    + " \"userImageUrl\":\"http://path.to/image\"}");
             return response;
           }
         };
@@ -110,5 +110,4 @@ public class OAuthTest {
     oauth.init(config);
     oauth.doGet(request, response);
   }
-
 }

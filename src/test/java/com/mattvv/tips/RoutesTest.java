@@ -1,22 +1,18 @@
 package com.mattvv.tips;
 
-import com.google.api.client.googleapis.auth.oauth2.GoogleAuthorizationCodeFlow;
-import com.google.api.client.http.javanet.NetHttpTransport;
-
 import static com.google.common.truth.Truth.assertThat;
-
-import com.google.inject.Injector;
-
-import javax.servlet.ServletContext;
-
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.Mock;
-
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 
+import com.google.api.client.googleapis.auth.oauth2.GoogleAuthorizationCodeFlow;
+import com.google.api.client.http.javanet.NetHttpTransport;
+import com.google.inject.Injector;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
+import javax.servlet.ServletContext;
+
 
 @RunWith(MockitoJUnitRunner.class)
 public class RoutesTest {

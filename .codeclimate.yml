@@ -5,9 +5,7 @@ engines:
   checkstyle:
     enabled: true
     channel: "beta"
-    checks:
-      com.puppycrawl.tools.checkstyle.checks.javadoc.JavadocMethodCheck:
-        enabled: false
+    config: "checkstyle.xml"
 
 ratings:
   paths:

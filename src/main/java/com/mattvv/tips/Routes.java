@@ -8,13 +8,12 @@ import com.google.api.client.json.jackson.JacksonFactory;
 import com.google.common.annotations.VisibleForTesting;
 import com.google.inject.Provides;
 import com.google.inject.servlet.ServletModule;
-import com.mattvv.tips.auth.Login;
-import com.mattvv.tips.auth.Logout;
-import com.mattvv.tips.auth.OAuth;
-
 import java.util.Arrays;
 import java.util.Collection;
 import javax.servlet.ServletContext;
+import com.mattvv.tips.auth.Login;
+import com.mattvv.tips.auth.Logout;
+import com.mattvv.tips.auth.OAuth;
 
 class Routes extends ServletModule {
   @Override
