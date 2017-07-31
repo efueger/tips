@@ -1,12 +1,12 @@
 package com.mattvv.tips;
 
 import com.google.inject.Singleton;
-import com.mattvv.tips.models.Team;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import com.mattvv.tips.models.Team;
 
 @Singleton
 public class Teams extends HttpServlet {
