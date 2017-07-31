@@ -1,6 +1,6 @@
 env:
   global:
-    - CC_TEST_REPORTER_ID=b15038ee548796d0ed31be32ac2fa605fd5b71bcbed75e31295f3aa5a69b5059
+    - CC_TEST_REPORTER_ID=4aea7d19ff53f24642fbe6c1ec89555a7bc15c806c6f5f58734d0b7c3d177344
     - GIT_COMMITTED_AT=$(if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then git log -1 --pretty=format:%ct; else git log -1 --skip 1 --pretty=format:%ct; fi)
 language: java
 jdk:
