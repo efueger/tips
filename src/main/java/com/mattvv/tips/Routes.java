@@ -22,6 +22,7 @@ class Routes extends ServletModule {
     serve("/login").with(Login.class);
     serve("/logout").with(Logout.class);
     serve("/oauth").with(OAuth.class);
+    serve("/teams").with(Teams.class);
   }
 
   @Provides
