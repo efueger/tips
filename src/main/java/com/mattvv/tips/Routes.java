@@ -14,7 +14,6 @@ import javax.servlet.ServletContext;
 import com.mattvv.tips.auth.Login;
 import com.mattvv.tips.auth.Logout;
 import com.mattvv.tips.auth.OAuth;
-import org.javalite.activejdbc.Base;
 
 class Routes extends ServletModule {
   @Override
