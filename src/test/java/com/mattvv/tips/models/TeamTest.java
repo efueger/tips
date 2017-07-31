@@ -3,7 +3,6 @@ package com.mattvv.tips.models;
 import static com.google.common.truth.Truth.assertThat;
 
 import com.google.common.collect.ImmutableList;
-import com.mattvv.tips.models.ImmutableTeam.Builder;
 import org.junit.Test;
 
 public class TeamTest {
